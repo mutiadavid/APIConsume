@@ -9,17 +9,26 @@ namespace APIConsume
 {
     class Program
     {
+        private static IList<Employee> employeeInMemoryDb;
         static void Main(string[] args)
         {
 
             var employees = AllEmployees();
 
-            File.WriteAllText("employees.json", JsonConvert.SerializeObject(employees));
+            File.WriteAllText("employees2.json", JsonConvert.SerializeObject(employees));
+
+            employeeInMemoryDb = Greater1000Age25();
+
+            Console.WriteLine(JsonConvert.SerializeObject(employeeInMemoryDb));
+
             Console.WriteLine("Done!");
             Console.ReadKey();
             }
 
-
+        /// <summary>
+        /// Get all employees from safaricom dummy data api
+        /// </summary>
+        /// <returns></returns>
         public static List<Employee> AllEmployees()
         {
             var client = new RestClient("http://dummy.restapiexample.com");
